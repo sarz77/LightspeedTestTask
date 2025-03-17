@@ -2,9 +2,27 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
+  background-color: #b8afafa1;
+  margin: 5%;
+  padding: 5%;
+}
+
+img {
+  max-width: 100%;
+}
+
+.cart-header {
+  display: flex;
+}
+
+.cart-title {
+  margin-right: 10px; /* optional, for spacing between title and widget */
+}
+
+.ec-cart-widget {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
 }
 
 /* Main Container for Flex Layout */
@@ -12,87 +30,52 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 20px;
-  padding: 20px;
-  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap; /* Allow items to wrap */
   position: relative; /* Ensure proper stacking order */
+}
+
+.main-container > div {
+  flex: 1; /* Each div will take up equal space */
+  max-width: 50%; /* Adjusted to fit side by side */
+  min-height: 800px;
+  min-width: 300px; /* Prevent too narrow divs on smaller screens */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
 /* Car Container */
 #car-container {
+  display: flex;
+  justify-content: center; /* Centers image horizontally */
+  align-items: center; /* Centers image vertically */
   position: relative;
-  flex: 1;
-  max-width: 60%;
-  margin: 0 auto;
+  max-width: 45%;
+  width: 100%;
+  height: 100%;
+  border: 5px solid blue; /* Debugging */
+  overflow: hidden;
+}
+
+.ec-cart-widget {
+  width: 20px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #car-image {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-}
-
-/* Clickable Areas with Specific Positioning */
-.clickable-area {
-  position: absolute;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0);
-}
-.clickable-text {
-  color: rgb(18, 133, 18); /* Text color */
-  font-size: 30px; /* Font size */
-  font-weight: bold; /* Text weight */
-  z-index: 2; /* Make sure the text is above other elements */
-}
-
-.windshield {
-  top: 0px;
-  left: 120px;
-  width: 180px;
-  height: 100px;
-  clip-path: polygon(80px 10px, 185px -15px, 160px 70px, 0px 90px);
-  transform: rotate(15deg);
-}
-
-.hood {
-  top: 80px;
-  left: 40px;
-  width: 240px;
-  height: 60px;
-  clip-path: polygon(0px 80px, 0px 240px, 240px 0px, 80px 0px);
-  transform: rotate(5deg);
-}
-
-.front-left-door {
-  top: 80px;
-  left: 295px;
-  width: 90px;
-  height: 120px;
-  clip-path: polygon(10% 22%, 100% -7%, 100% 60%, 15% 100%);
-}
-
-.front-left-wheel {
-  top: 160px;
-  left: 200px;
-  width: 110px;
-  height: 110px;
-  clip-path: ellipse(30% 45% at 55% 55%);
-  transform: rotate(15deg);
-}
-
-.back-left-wheel {
-  top: 105px;
-  left: 400px;
-  width: 40px;
-  height: 75px;
-  clip-path: ellipse(45% 45% at 50% 50%);
-  transform: rotate(15deg);
+  margin: auto;
+  align-self: center;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block; /* Remove inline spacing issues */
 }
 
 /* Cart Container */
 .cart-container {
   flex: 1;
-  max-width: 35%;
+  max-width: 45%; /* Adjusted to fit side by side */
   min-width: 300px;
   margin: 0;
   background: #fff;
@@ -100,14 +83,16 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  border: 5px solid green; /* Debugging: Add border to see container */
+  width: auto; /* Allow the cart container to adjust its width */
 }
 
 /* Title */
 .cart-title {
-  font-size: 24px;
+  font-size: 90px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 #deleteAllItemsButton {
@@ -115,21 +100,34 @@ body {
   color: white;
   border: none;
   padding: 10px 15px;
-  font-size: 14px;
+  font-size: 50px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 15px;
   transition: background 0.3s ease-in-out;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+#header_id {
+  font-size: 90px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
 }
 
 #deleteAllItemsButton:hover {
   background: #d43f3f;
 }
 
+#car-complete-message {
+  font-size: 40px;
+  color: #333;
+  margin-top: 20px;
+}
+
 /* Table Styling */
 .cart-table {
-  width: 100%;
-  max-width: 600px; /* Limit table width */
+  width: 100%; /* Ensure table takes full width of the container */
+  max-width: 100%; /* Limit table width */
   border-collapse: collapse;
   background: #f9f9f9;
   border-radius: 8px;
@@ -141,7 +139,7 @@ body {
   background-color: #333;
   color: white;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 100px;
   letter-spacing: 1px;
 }
 
@@ -150,7 +148,9 @@ body {
   padding: 12px;
   border: 1px solid #ddd;
   text-align: center;
-  font-size: 14px;
+  font-size: 35px;
+  max-width: 100%;
+  letter-spacing: 3px;
 }
 
 .cart-table tbody tr:nth-child(even) {
@@ -168,28 +168,23 @@ body {
   color: white;
   border: none;
   padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 5px;
+  font-size: 35px;
+  border-radius: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .cart-table td button.delete-btn:hover {
-  background-color: #d32f2f;
+  background-color: #bb6b6b;
 }
 
 .cart-table td button.delete-btn:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
-.main-container > div {
-  flex: 1; /* Each div will take up equal space */
-  max-width: 33.33%; /* Set width to a third of the container */
-  min-width: 300px; /* Prevent too narrow divs on smaller screens */
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
-}
+
 #guide-container {
-  max-width: 30%;
+  max-width: 100%;
   margin-top: 20px;
   padding: 10px;
   display: flex;
@@ -197,6 +192,32 @@ body {
   flex-wrap: wrap;
   gap: 20px;
   text-align: left; /* Align text to the left within the container */
+  font-size: 30px;
+}
+
+/* Make clickable areas visible */
+area[data-product-id] {
+  outline: 2px solid red; /* Add a red border */
+  background-color: rgba(
+    255,
+    0,
+    0,
+    0.2
+  ); /* Add a semi-transparent red background */
+}
+
+#log-message {
+  margin-top: 20px; /* Adjust margin */
+  font-weight: bold;
+  color: blue;
+  font-size: 45px; /* Increase font size */
+}
+
+#product-message {
+  margin-top: 20px; /* Adjust margin */
+  font-weight: bold;
+  color: green;
+  font-size: 45px; /* Increase font size */
 }
 
 /* Responsive Design */
@@ -204,22 +225,12 @@ body {
   .main-container {
     flex-direction: column;
     align-items: center;
-    .guide-container {
-      align-items: left;
-    }
   }
 
   #car-container,
   .cart-container {
     max-width: 100%;
     margin: 0;
-  }
-
-  .clickable-area {
-    width: 60px;
-    height: 60px;
-    top: initial;
-    left: initial;
   }
 
   .cart-title {
@@ -233,24 +244,125 @@ body {
 
   .cart-table th,
   .cart-table td {
+    max-width: 100%;
     font-size: 10px;
     padding: 10px;
   }
 
   .cart-table {
-    max-width: 50%;
+    max-width: 100%; /* Ensure table takes full width */
     margin: 0;
   }
 
   /* Guide Container Adjustments */
   #guide-container {
     text-align: left;
-    max-width: 30%;
+    max-width: 100%;
     margin: 0;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
+  }
+}
+
+/* Additional Media Query for Smaller Screens */
+@media (max-width: 480px) {
+  .main-container {
+    max-width: 100%;
+
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #car-container,
+  .cart-container {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 0 20px 0; /* Add margin to separate the containers */
+  }
+
+  .cart-table {
+    max-width: 100%;
+    overflow-x: auto; /* Add horizontal scroll for small screens */
+  }
+}
+
+@media (max-width: 1065px) {
+  .main-container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  #car-container,
+  .cart-container {
+    max-width: 45%;
+  }
+
+  .cart-table {
+    max-width: 100%;
+    overflow-x: auto; /* Add horizontal scroll for small screens */
+  }
+  .cart-table th,
+  .cart-table td {
+    max-width: 100%;
+    font-size: 10px;
+    padding: 10px;
+  }
+  .cart-table thead {
+    max-width: 100%;
+
+    font-size: 2px;
+    letter-spacing: 0px;
+  }
+}
+
+@media (max-width: 2500px) {
+  .cart-table th,
+  .cart-table td {
+    max-width: 100%;
+    font-size: 20px;
+    padding: 10px;
+  }
+}
+@media (max-width: 1678px) {
+  .cart-table th,
+  .cart-table td {
+    max-width: 100%;
+    font-size: 18px;
+    padding: 10px;
+  }
+  #deleteAllItemsButton {
+    padding: 8px 12px;
+    font-size: 29px;
+  }
+}
+
+@media (max-width: 1550px) {
+  .cart-title {
+    font-size: 50px; /* 90px * 0.85 */
+  }
+
+  #deleteAllItemsButton {
+    font-size: 32px; /* 50px * 0.85 */
+  }
+
+  #header_id {
+    font-size: 40px; /* 90px * 0.85 */
+  }
+
+  .cart-table thead {
+    font-size: 40px; /* 100px * 0.85 */
+  }
+
+  .cart-table th,
+  .cart-table td {
+    font-size: 15px; /* 35px * 0.85 */
+  }
+
+  #log-message,
+  #product-message {
+    font-size: 15px; /* 45px * 0.85 */
   }
 }

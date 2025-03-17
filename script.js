@@ -39,10 +39,13 @@ function updateCartState() {
     });
 
     let carContainer = document.getElementById("car-container");
+    let carImage = document.getElementById("car-image");
+    let congradulationMessage = document.getElementById("car-complete-message");
 
     // Check if the car is fully built
     if (cart.items.length >= maxParts) {
-      carContainer.style.display = "none"; // Hide car-container
+      carImage.style.display = "none"; // Hide car-container
+      congradulationMessage.style.display = "block"; // Show congradulation message
 
       showMessage(
         "Поздравляем! Вы собрали автомобиль! 🎉",
@@ -50,7 +53,8 @@ function updateCartState() {
         "log-message"
       );
     } else {
-      carContainer.style.display = "block"; // Show car-container
+      carImage.style.display = "block"; // Show car-container
+      congradulationMessage.style.display = "none"; // Hide congradulation message
       showMessage(
         `В корзине ${cart.items.length} деталей. Осталось добавить ${
           maxParts - cart.items.length
@@ -62,8 +66,10 @@ function updateCartState() {
   });
 }
 
-document.querySelectorAll(".clickable-area").forEach((part) => {
-  part.addEventListener("click", async function () {
+// Update event listeners to handle the new image map areas
+document.querySelectorAll("area[data-product-id]").forEach((part) => {
+  part.addEventListener("click", async function (event) {
+    event.preventDefault(); // Prevent default link behavior
     const productId = this.getAttribute("data-product-id");
 
     // Get current cart and check if the part is already added
@@ -101,6 +107,7 @@ document.querySelectorAll(".clickable-area").forEach((part) => {
     });
   });
 });
+
 document
   .getElementById("deleteAllItemsButton")
   .addEventListener("click", function () {
@@ -111,12 +118,14 @@ document
           "green",
           "product-message"
         );
+        updateCartState(); // Refresh the table with updated cart state
       } else {
         console.error("Failed to delete items. Error: " + error);
         alert("Failed to delete items.");
       }
     });
   });
+
 Ecwid.OnCartChanged.add(updateCartState);
 // Run on page load to sync the UI with existing cart items
 updateCartState();

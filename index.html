@@ -7,16 +7,10 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Соберите автомобиль!</h1>
+    <h1 id="header_id">Соберите автомобиль!</h1>
 
-    <div
-      id="log-message"
-      style="margin-top: 10px; font-weight: bold; color: blue"
-    ></div>
-    <div
-      id="product-message"
-      style="margin-top: 10px; font-weight: bold; color: green"
-    ></div>
+    <div id="log-message"></div>
+    <div id="product-message"></div>
 
     <!-- Ecwid Cart Widget -->
     <script
@@ -25,59 +19,24 @@
       src="https://app.ecwid.com/script.js?114052293&data_platform=code&data_date=2025-03-16"
       charset="utf-8"
     ></script>
+    
     <script type="text/javascript">
       Ecwid.init();
     </script>
 
     <!-- Car Assembly -->
-    <div class="main-container">
-      <div id="guide-container"></div>
-
+    <div class="main-container" style="display: flex;">
       <div id="car-container">
-        <img src="car.png" id="car-image" />
-
-        <div
-          class="clickable-area rectangle windshield"
-          data-product-id="734288089"
-        >
-          <span class="clickable-text">1</span>
-        </div>
-        <div class="clickable-area rectangle hood" data-product-id="734288367">
-          <span class="clickable-text">2</span>
-        </div>
-        <div
-          class="clickable-area rectangle front-left-door"
-          data-product-id="734288364"
-        >
-          <span class="clickable-text">3</span>
-        </div>
-        <div
-          class="clickable-area oval back-left-wheel"
-          data-product-id="734287596"
-        >
-          <span class="clickable-text">4</span>
-        </div>
-        <div
-          class="clickable-area oval front-left-wheel"
-          data-product-id="734288366"
-        >
-          <span class="clickable-text">5</span>
-        </div>
+        <img id="car-image" src="car.png" usemap="#image-map">
+        <div id="car-complete-message" style="display: none;">Вы собрали автомобиль!</div>
+        <map name="image-map">
+          <area target="" alt="1" title="" href="#" coords="284,416,73,352,90,290,187,200,580,254,500,369,391,392,329,431,308,450,274,446" shape="poly" data-product-id="734288089"></area>
+          <area target="" alt="2" title="" href="#" coords="247,168,436,36,592,34,721,45,605,218,391,199" shape="poly" data-product-id="734288367"></area>
+          <area target="" alt="3" title="" href="#" coords="503,552,537,478,587,438,640,458,660,509,650,603,614,672,579,701,520,700,478,678,480,609" shape="poly" data-product-id="734288364"></area>
+          <area target="" alt="4" title="" href="#" coords="972,318,998,284,1019,277,1037,302,1034,356,1014,424,981,445,947,435,931,407,953,356" shape="poly" data-product-id="734287596"></area>
+          <area target="" alt="5" title="" href="#" coords="886,182,970,143,992,183,998,224,988,263,971,309,934,388,890,404" shape="poly" data-product-id="734288366"></area>
+        </map>
       </div>
-      <script>
-        // Function to load external HTML content into the div
-        function loadGuide() {
-          fetch("guide.html")
-            .then((response) => response.text())
-            .then((data) => {
-              document.getElementById("guide-container").innerHTML = data;
-            })
-            .catch((error) => console.error("Error loading the guide:", error));
-        }
-
-        // Call the function to load the guide when the page loads
-        window.onload = loadGuide;
-      </script>
       <div class="cart-container">
         <div class="cart-header">
           <h3 class="cart-title">Корзина</h3>
@@ -99,6 +58,53 @@
       </div>
     </div>
 
+    <div id="guide-container"></div>
+
+    <script>
+      // Function to load external HTML content into the div
+      function loadGuide() {
+        fetch("guide.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("guide-container").innerHTML = data;
+          })
+          .catch((error) => console.error("Error loading the guide:", error));
+      }
+
+      // Function to check if the car is fully assembled
+      function checkCarCompletion() {
+        const cartItems = document.querySelectorAll('#cart-table-body tr');
+        const requiredItems = 5; // Number of items required to complete the car
+        if (cartItems.length >= requiredItems) {
+          document.getElementById('car-image').style.display = 'none';
+          document.getElementById('car-complete-message').style.display = 'block';
+        } else {
+          document.getElementById('car-image').style.display = 'block';
+          document.getElementById('car-complete-message').style.display = 'none';
+        }
+      }
+
+      // Call the function to load the guide and check car completion when the page loads
+      window.onload = function() {
+        loadGuide();
+        checkCarCompletion();
+      };
+
+      // Add event listener to update car completion status when items are added or removed
+      document.getElementById('cart-table-body').addEventListener('DOMSubtreeModified', checkCarCompletion);
+    </script>
+
     <script src="script.js"></script>
+    <script src="imageMapResizer.js"></script>
+    <script>
+      // Ensure the image map resizes properly
+      window.addEventListener('load', function() {
+        imageMapResize();
+      });
+
+      window.addEventListener('resize', function() {
+        imageMapResize();
+      });
+    </script>
   </body>
 </html>
