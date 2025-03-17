@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Соберите автомобиль</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Соберите автомобиль!</h1>
+
+    <div
+      id="log-message"
+      style="margin-top: 10px; font-weight: bold; color: blue"
+    ></div>
+    <div
+      id="product-message"
+      style="margin-top: 10px; font-weight: bold; color: green"
+    ></div>
+
+    <!-- Ecwid Cart Widget -->
+    <script
+      data-cfasync="false"
+      type="text/javascript"
+      src="https://app.ecwid.com/script.js?114052293&data_platform=code&data_date=2025-03-16"
+      charset="utf-8"
+    ></script>
+    <script type="text/javascript">
+      Ecwid.init();
+    </script>
+
+    <!-- Car Assembly -->
+    <div class="main-container">
+      <div id="guide-container"></div>
+
+      <div id="car-container">
+        <img src="car.png" id="car-image" />
+
+        <div
+          class="clickable-area rectangle windshield"
+          data-product-id="734288089"
+        >
+          <span class="clickable-text">1</span>
+        </div>
+        <div class="clickable-area rectangle hood" data-product-id="734288367">
+          <span class="clickable-text">2</span>
+        </div>
+        <div
+          class="clickable-area rectangle front-left-door"
+          data-product-id="734288364"
+        >
+          <span class="clickable-text">3</span>
+        </div>
+        <div
+          class="clickable-area oval back-left-wheel"
+          data-product-id="734287596"
+        >
+          <span class="clickable-text">4</span>
+        </div>
+        <div
+          class="clickable-area oval front-left-wheel"
+          data-product-id="734288366"
+        >
+          <span class="clickable-text">5</span>
+        </div>
+      </div>
+      <script>
+        // Function to load external HTML content into the div
+        function loadGuide() {
+          fetch("guide.html")
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("guide-container").innerHTML = data;
+            })
+            .catch((error) => console.error("Error loading the guide:", error));
+        }
+
+        // Call the function to load the guide when the page loads
+        window.onload = loadGuide;
+      </script>
+      <div class="cart-container">
+        <div class="cart-header">
+          <h3 class="cart-title">Корзина</h3>
+          <div class="ec-cart-widget"></div>
+        </div>
+        <button id="deleteAllItemsButton">Удалить все товары</button>
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Название</th>
+              <th>Количество</th>
+              <th>Редактировать</th>
+            </tr>
+          </thead>
+          <tbody id="cart-table-body">
+            <!-- Cart items will be dynamically inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
