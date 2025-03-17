@@ -8,8 +8,7 @@ The goal of this project was to create an interactive HTML page featuring a sche
 
 ### 1. **Image Map Generator**
 
-- Used to create clickable areas on the car image.
-- Tool link: _Not provided but referenced as an online tool in the task description._
+- Used to create clickable areas on the car image. [image-map](https://www.fla-shop.com/image-map/)
 
 ### 2. **Image Map Resizer**
 
